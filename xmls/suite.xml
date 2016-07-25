@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="SomeSuite" verbose="1" parallel="false">
+    <parameter name="browser" value="CH"/>
+    <test name="SomeTest">
+        <classes>
+            <class name="tests.ParallelTestTry"/>
+        </classes>
+    </test>
+
+</suite>

@@ -7,7 +7,7 @@ public class ParallelTestTry extends BrowserFactory{
 
     @Test
     public void tryIt() throws InterruptedException {
-        driver.get("https://kismia.com/");
+        get("https://kismia.com/");
         Thread.sleep(4000);
     }
 }

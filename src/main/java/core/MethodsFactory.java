@@ -8,12 +8,21 @@ import java.util.concurrent.TimeUnit;
 
 public class MethodsFactory {
 
-    public static WebDriver driver;
+    public static ThreadLocal<WebDriver> DRIVER = new ThreadLocal<>();
+    public static WebDriver driver() {
+        return DRIVER.get();
+    }
+
+    public WebDriver driver;
     public static final int DEFAULT_WAIT_TIME = 30;
+
+    public void get(String url) {
+        driver().get(url);
+    }
 
     public boolean waitForUrlContains(String text, int sec){
         for(int i = 0; i<=sec*10; i++){
-            if(driver.getCurrentUrl().contains(text)) {
+            if(driver().getCurrentUrl().contains(text)) {
                 return true;
             }
             try {
@@ -26,9 +35,18 @@ public class MethodsFactory {
     }
 
     public boolean isElementPresent(By by, int sec) {
-        driver.manage().timeouts().implicitlyWait(sec, TimeUnit.SECONDS);
+        driver().manage().timeouts().implicitlyWait(sec, TimeUnit.SECONDS);
         List<WebElement> elementList = driver.findElements(by);
-        driver.manage().timeouts().implicitlyWait(DEFAULT_WAIT_TIME, TimeUnit.SECONDS);
+        driver().manage().timeouts().implicitlyWait(DEFAULT_WAIT_TIME, TimeUnit.SECONDS);
         return elementList.size() > 0;
+    }
+
+    public void type(By locator, String text) {
+        driver().findElement(locator).clear();
+        driver().findElement(locator).sendKeys(text);
+    }
+
+    public void click(By locator) {
+        driver().findElement(locator).click();
     }
 }

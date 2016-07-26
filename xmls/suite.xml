@@ -1,10 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="SomeSuite" verbose="1" parallel="false">
-    <parameter name="browser" value="CH"/>
-    <test name="SomeTest">
+<suite name="Suite" verbose="1" parallel="tests">
+    <parameter name="browser" value="MOBILE"/>
+    <test name="test1">
         <classes>
             <class name="tests.ParallelTestTry"/>
         </classes>
     </test>
-
+    <test name="test2">
+        <classes>
+            <class name="tests.ParallelTestTry"/>
+        </classes>
+    </test>
 </suite>
